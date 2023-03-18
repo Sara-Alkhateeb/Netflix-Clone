@@ -32,8 +32,11 @@ function Movie(props) {
                             <Card.Body>
                                 <Card.Title>{props.movie.Title}</Card.Title>
                                 <Card.Text>
-                                    <p>{props.movie.posterPath}</p>
-                                    <p>{props.movie.overview}</p>
+                                    {props.movie.posterPath}
+                                    </Card.Text>
+
+                                    <Card.Text>
+                                    {props.movie.overview}
                                 </Card.Text>
                                 <Button variant="primary" style={{ backgroundColor: 'black' }} onClick={() => {handleShow(props.movie)}}>add to favourite</Button>
                             </Card.Body>
