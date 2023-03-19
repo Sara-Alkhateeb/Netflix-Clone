@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Update from './Update';
-import './FavList.css' ;
+import './FavList.css';
 import Delete from './Delete';
 
 
@@ -50,17 +50,17 @@ function FavList() {
         setDeleteFlag(false);
     }
 
-const  setDeletedMovie =(arr) =>{
-    setFavArr(arr)
-}
-const  setUpdatedMovie =(arr) =>{
-    setFavArr(arr)
-}
+    const setDeletedMovie = (arr) => {
+        setFavArr(arr)
+    }
+    const setUpdatedMovie = (arr) => {
+        setFavArr(arr)
+    }
 
     return (
         <>
             <NavBar />
-            <Row xs={1} md={2} className="g-4" id ='favlist'>
+            <Row xs={1} md={2} className="g-4" id='favlist'>
                 {favArr.map((movie) => {
                     // console.log(movie);
                     // console.log(movie.comment);
@@ -72,12 +72,12 @@ const  setUpdatedMovie =(arr) =>{
                                     <Card.Title>{movie.title}</Card.Title>
                                     <Card.Text>
                                         {movie.releasedate}
-                                        </Card.Text>
+                                    </Card.Text>
 
-                                        <Card.Text>
+                                    <Card.Text>
                                         {movie.overview}
                                     </Card.Text>
-                                    
+
                                     <Card.Text>
                                         {movie.comment}
                                     </Card.Text>
@@ -88,8 +88,8 @@ const  setUpdatedMovie =(arr) =>{
                         </Col> </div>)
                 })}
             </Row>
-            <Update closeUpdateModal={closeUpdateModal} updateFlag={updateFlag} movie={clickedMovie} setUpdatedMovie={setUpdatedMovie}/>
-            <Delete closeDeleteModal={closeDeleteModal} deleteFlag={deleteFlag} movie={clickedMovie}  setDeletedMovie={ setDeletedMovie}/>
+            <Update closeUpdateModal={closeUpdateModal} updateFlag={updateFlag} movie={clickedMovie} setUpdatedMovie={setUpdatedMovie} />
+            <Delete closeDeleteModal={closeDeleteModal} deleteFlag={deleteFlag} movie={clickedMovie} setDeletedMovie={setDeletedMovie} />
         </>
     );
 }
