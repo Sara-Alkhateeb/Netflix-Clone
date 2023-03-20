@@ -7,26 +7,30 @@ import { Form } from 'react-bootstrap';
 function ModalMovie(props) {
   const [comment, setComment] = useState('');
 
-  const handlecomment = (event) => { setComment(event.target.value) }
+  const handlecomment = (event) => { setComment(event.target.value); }
   const postRes = async () => {
-    await fetch(`https://movies-library-bqib9wri1-sara-alkhateeb.vercel.app/addMovie`,
+
+    console.log(comment);
+
+    await fetch(`${process.env.REACT_APP_serverURL}/addMovie`,
       {
         method: 'POST',
         body: JSON.stringify(
           {
-            title: props.movieData.title,
-            releasedate: props.movieData.posterPath,
-            posterpath: props.movieData.releaseDate,
-            overview: props.movieData.overview,
-            commentText: comment
+            title: props.selectedMovie.title ? props.selectedMovie.title : "Title",
+            releaseDate: props.selectedMovie.posterPath,
+            posterPath: props.selectedMovie.releaseDate,
+            overview: props.selectedMovie.overview,
+            comment: comment
           }), headers: { 'Content-type': 'application/json; charset=UTF-8', },
       }
     )
+    console.log(comment);
   }
 
-  const style2={backgroundColor: 'black'}
-  const style3={display:'flex'}
-  const style1={gap: '10px'}
+  const style2 = { backgroundColor: 'black' }
+  const style3 = { display: 'flex' }
+  const style1 = { gap: '10px' }
 
   return (
     <Modal style={{ ...style2 }} show={props.showFlag} onHide={props.handleclose}>
@@ -40,27 +44,31 @@ function ModalMovie(props) {
             {props.selectedMovie.overview}
           </Modal.Title>
         </div>
-        <div>
+       
+          <Form onSubmit={props.handleclose}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Label style={{ fontSize: '30px' }}>Add comment</Form.Label>
             <Form.Control as="textarea" onChange={handlecomment} rows={3} />
           </Form.Group>
-        </div>
-
+         
+            </Form>
       </Modal.Body>
+      
       <Modal.Footer style={{ backgroundColor: 'gray' }} >
         <Button variant="secondary" onClick={props.handleclose}>
           Close
         </Button>
-        <Button variant="primary" style={{ backgroundColor: 'gray' }}onClick={() => {
+        <Button variant="primary" type="submit" style={{ backgroundColor: 'gray' }} onClick={() => {
           alert('your comment Added !')
           postRes();
 
         }}>
           add to favorite
         </Button>
+        
       </Modal.Footer>
-    </Modal>
+      
+    </Modal >
 
   );
 }
